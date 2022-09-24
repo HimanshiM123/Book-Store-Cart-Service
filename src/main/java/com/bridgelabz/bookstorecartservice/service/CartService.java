@@ -30,7 +30,7 @@ public class CartService implements ICartService {
     RestTemplate restTemplate;
 
     @Override
-    public Response addBooksToCart(CartDTO cartDTO, String token, Long bookId, Long orderQuantity) {
+    public Response addBooksToCart(CartDTO cartDTO, String token, Long bookId) {
        UserResponse isUserPresent = restTemplate.getForObject("http://BS-USER-SERVICE:8083/user/verify/" + token, UserResponse.class);
         if (isUserPresent.getErrorCode() == 200) {
             Long userId = tokenUtil.decodeToken(token);

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface ICartService {
-    Response addBooksToCart(CartDTO cartDTO, String token, Long bookId, Long orderQuantity);
+    Response addBooksToCart(CartDTO cartDTO, String token, Long bookId);
 
     Response updateQuantity(String token, Long bookId, Long orderQuantity);
 
