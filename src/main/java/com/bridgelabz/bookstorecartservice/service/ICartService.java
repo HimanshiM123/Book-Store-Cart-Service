@@ -11,11 +11,15 @@ import java.util.List;
 public interface ICartService {
     Response addBooksToCart(CartDTO cartDTO, String token, Long bookId);
 
-    Response updateQuantity(String token, Long bookId, Long orderQuantity);
+    Response updateQuantity(String token, Long bookId, Long quantity);
 
     Response removeFromCart(String token, Long cartId);
 
     List<CartModel> getAllCartItemForUser(String token);
 
     List<CartModel> getAllCartItem();
+
+    Response verifyCartItem(Long cartId);
+
+    Response deleteCartItem(Long cartId);
 }

@@ -18,14 +18,14 @@ public class CartController {
     ICartService cartService;
 
     @PostMapping(value = "/addBooksToCart")
-    ResponseEntity<Response> addToCart(@RequestBody CartDTO cartDTO, @RequestHeader String token, @PathVariable Long bookId, @PathVariable Long orderQuantity) {
-        Response response = cartService.addBooksToCart(cartDTO, token, bookId, orderQuantity);
+    ResponseEntity<Response> addToCart(@RequestBody CartDTO cartDTO, @RequestHeader String token, @PathVariable Long bookId) {
+        Response response = cartService.addBooksToCart(cartDTO, token, bookId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/updateQuantity")
-    ResponseEntity<Response> updateQuantity(@RequestHeader String token, @PathVariable Long bookId) {
-        Response response = cartService.updateQuantity(token, bookId);
+    ResponseEntity<Response> updateQuantity(@RequestHeader String token, @PathVariable Long bookId, @PathVariable Long quantity) {
+        Response response = cartService.updateQuantity(token, bookId, quantity);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -44,4 +44,17 @@ public class CartController {
     public List<CartModel> getAllCartItem(){
         return cartService.getAllCartItem();
     }
+
+    @GetMapping("/verifyCartItem/{id}")
+    ResponseEntity<Response> verifyCartItem(@PathVariable Long cartId) {
+        Response response = cartService.verifyCartItem(cartId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteCartItem/{id}")
+    ResponseEntity<Response> deleteCartItem(@PathVariable Long cartId) {
+        Response response = cartService.deleteCartItem(cartId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

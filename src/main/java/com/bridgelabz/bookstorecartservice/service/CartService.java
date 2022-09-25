@@ -126,4 +126,24 @@ public class CartService implements ICartService {
 
         return cartRepository.findAll();
     }
+
+    @Override
+    public Response verifyCartItem(Long cartId) {
+        Optional<CartModel> isCartPresent = cartRepository.findById(cartId);
+        if (isCartPresent.isPresent()){
+            return new Response("Cart item found with this id", 200, isCartPresent.get());
+        }
+        throw new CartException(400, "Cart Not Found");
+    }
+
+    @Override
+    public Response deleteCartItem(Long cartId) {
+        Optional<CartModel> isCartPresent = cartRepository.findById(cartId);
+        if (isCartPresent.isPresent()){
+            cartRepository.delete(isCartPresent.get());
+            return new Response("Cart item deleted", 200, isCartPresent.get());
+        }
+        throw new CartException(400, "Cart Not Found");
+    }
+
 }
